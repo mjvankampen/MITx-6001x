@@ -1,7 +1,6 @@
 from ps4a import *
 import time
 
-
 #
 #
 # Computer chooses a word
@@ -40,6 +39,7 @@ def compChooseWord(hand, wordList, n):
                 bestWord = word
     # return the best word you found.
     return bestWord
+
 
 #
 # Computer plays a hand
@@ -124,15 +124,39 @@ def playGame(wordList):
 
     wordList: list (string)
     """
-    # TO DO... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this when you code this function
 
-        
+    while True:
+        userInput = input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
+        if userInput == 'e':
+            break
+        elif userInput == 'n':
+            hand = dealHand(HAND_SIZE)
+        elif userInput == 'r':
+            if 'hand' not in locals():
+                print('You have not played a hand yet. Please play a new hand first!')
+                continue
+        else:
+            print('Invalid command. \n')
+            continue
+
+        while True:
+            userInput2 = input('Enter u to have yourself play, c to have the computer play: ')
+            if userInput2 == 'u':
+                playHand(hand, wordList, HAND_SIZE)
+                break
+            elif userInput2 == 'c':
+                compPlayHand(hand, wordList, HAND_SIZE)
+                break
+            else:
+                print('Invalid command. \n')
+
+
+
+
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     wordList = loadWords()
     playGame(wordList)
-
 
